@@ -1,0 +1,45 @@
+Website:
+    minimalistic but with a lot of space. Page must be filled as balanced as Chinise philosohy and deep as cold mountine or cyberpunk antiutopie
+    hacker / tech / cyberpunk / any other style
+    also you can give me your propositions about page profile style. It can be any other, even not tech
+    All skills, that I have learned o projects I do and develop, I want to present them on the vertical timeline. The deeper you go - the oder time you see.
+
+How can I describe myself?
+    - personality
+        - psychotype
+        - sport
+    - history
+        - experience
+        - degree
+    - knowledge
+        - skills
+            - social
+                - Agile
+                - Scrum
+            - tech
+                 - math
+                     - Math Analysis
+                     - Topology
+                     - ...
+                 - programming
+                    - fontend
+                    - backend
+                 - administration
+                     - Arch Linux
+             - psychology
+                 - Jung
+                 - Psychoanalysis
+             - philosophy
+                 - Cant
+             - History
+             ...
+        - languages
+             - eng
+             - rus
+             - ukr
+             - pol
+        - projects
+        - books I have read
+        - cources I have end up
+        -
+

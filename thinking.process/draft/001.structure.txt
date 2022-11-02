@@ -1,0 +1,68 @@
+Main:
+    In fact this is "welcome page" and nobody gonna be there to use it.
+    There will be:
+        My photo
+        About me (my psychotype is shown here)
+        Link to timeline
+        Link to blog
+        Link to
+Resume:
+    There will be blocks on which are links to the resumes of different type.
+    For example, there can be resume links for the following positions:
+        - React developer
+        - Vue Developer
+        - Frontend Developer
+        - PHP developer
+        - Python Developer
+        - Node.js developer
+        - Backend developer
+        - FUllstac developer
+        - Mathematician
+        - General
+Contact:
+    No forms, You can contact with me via the following links:
+    LinkedIn
+    Telegram
+    Github
+    ...
+Timeline:
+    How it works:
+        Horizontal scroll.
+        On the right is now.
+        On the very left is first time I entered IT.
+        First time I opern the page, I'm on the very right side.
+        So I will scroll to left to see older things.
+    How to find similar looks:
+        You can google it with "progress timeline" or "timeline chart"
+        https://images.app.goo.gl/fsDyr5pMwaNg8MU49
+    What will be there:
+        There will be displayed my work expirience and think I have learned or am learning.
+        This can be tech skills like programming or Unix administration or other things like
+        psychology, math, history and so on. Also there can be displayed my participations somewhere.
+        For example, hackatons or seminariums and so on. Also there can be displayed my study progress
+        in university. Also, my project can be there. So on, so on, so on...
+    Functions:
+        I can sort timeline elements by groups. For example, display only things, which are connected
+        to the my job expirience, or only to tech skills or both and so on.
+    How it looks like:
+        A full window timeline horizontal chart, where are a lot of horizontal colored lines, with
+        titles, which represents thing I was doing that moment.
+        As the first my proposition, I would split timechart elelemnts on the following groups:
+            - eduction
+            - job
+            - tech skill
+                - frontend
+                - backend
+                - administration
+                - math
+                - ...
+            - psychology
+            - history
+            - philosophy
+            - languages
+            - projects
+            - ...
+
+
+
+

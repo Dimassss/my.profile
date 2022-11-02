@@ -1,0 +1,27 @@
+I like dark style.
+On the welcome page can be photo on the backgound. Background examples:
+    http://jchomali.com/                #backgound photo
+    https://amineafia.github.io/        #interesting animations on background
+    https://alexcory.com/               #interesting paralax effect
+    http://akul.me/
+    http://antoniomarino.me/            #back photo is covered with dark smog effect or what is this?cool
+Font type examples:
+    https://cassidoo.co/                #type is like in terminal. Looks pretty good
+    https://aditimohanty.com/           #type is ease and dont disturb eyes
+Text style:
+    http://www.pawar.ca/                #he writed section about him like CSS code. Looks cool.
+                                        # I want this on my site. FOr example in "About me" section.
+                                        # If it dont gonna be ugly, we can make whole site in this style.
+                                        # Also this site feels as "infinite", however you can't scroll.
+                                        # In my opinion, this is due to centered content on the welcome
+                                        # page. I dont wont such a big margins on the whole wite.
+                                        # Maybe only on welcome page.
+How site is feeling:
+    Minimalistic and STRICT. On the welcome page can also be filled as free and infinite.
+Colors i like:
+    I like color color mixes
+    Something on the dark back with colored elements.
+    Look at color balance here: https://images.app.goo.gl/iD2QWNFfCtV3J8nm7
+    You can make any other color balance, which is also dark.
+
+
