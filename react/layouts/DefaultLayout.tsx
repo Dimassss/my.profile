@@ -8,34 +8,32 @@ const { Header, Footer, Sider, Content } = Layout;
 
 interface Props extends React.PropsWithChildren {}
 
-const keyMapTitle = {
-    "home": "Home page",
-    "cv": "Resume",
-    "timechart": "Progress Time Chart",
-    "contact": "Contact Information"
-} as {[keyName: string]: string}
 const menuItems = [
     {
         key: 'home',
         icon: <HomeOutlined className={styles["menu-item-icon"]}/>,
-        className: styles["menu-item"]
+        className: styles["menu-item"],
+        title: "Home page"
     },
     {
         key: 'cv',
         icon: <IdcardOutlined className={styles["menu-item-icon"]}/>,
-        className: styles["menu-item"]
+        className: styles["menu-item"],
+        title: "Resume"
     },
     {
         key: 'timechart',
         icon: <LineChartOutlined className={styles["menu-item-icon"]}/>,
-        className: styles["menu-item"]
+        className: styles["menu-item"],
+        title: "Progress Time Chart"
     },
     {
         key: 'contact',
         icon: <CommentOutlined className={styles["menu-item-icon"]}/>,
-        className: styles["menu-item"]
+        className: styles["menu-item"],
+        title: "Contact Information"
     }
-].map(el => ({...el, icon: (<Tooltip placement='right' title={keyMapTitle[el.key]}>{el.icon}</Tooltip>)}))
+]
 
 export default function DefaultLayout({children}: Props){
     const router = useRouter()
