@@ -59,7 +59,7 @@ export default function DefaultLayout({children}: Props){
             />
         </Sider>
         <Layout className={styles["layout-body"]}>
-            {children}
+            <Content>{children}</Content>
         </Layout>
     </Layout>)
 }
