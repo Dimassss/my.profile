@@ -50,7 +50,11 @@ export default function DefaultLayout({children}: Props){
             <Menu
                 theme="dark"
                 mode="inline"
-                defaultSelectedKeys={['home']}
+                selectedKeys={[
+                    router.pathname.split('/')[1]
+                        ? router.pathname.split('/')[1]
+                        : 'home'
+                ]}
                 items={menuItems}
                 className={styles["sider-menu"]}
                 onSelect={(el) => {
