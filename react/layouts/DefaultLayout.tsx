@@ -58,7 +58,8 @@ export default function DefaultLayout({children}: Props){
                 items={menuItems}
                 className={styles["sider-menu"]}
                 onSelect={(el) => {
-                    router.push(el.key)
+                    window.open(el.key, '_self')
+                    //router.push(el.key)
                 }}
             />
         </Sider>

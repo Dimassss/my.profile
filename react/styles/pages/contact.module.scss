@@ -1,0 +1,28 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 100vh;
+
+    ul {
+        list-style-type: none;
+
+        li {
+            cursor: pointer;
+            margin-top: 1em;
+            border: 1px solid #999;
+            padding: 1em;
+
+            &:hover {
+                background-color: #ddd;
+            }
+        }
+    }
+
+    .open-btn {
+        margin: auto;
+        margin-top: 1em;
+        
+    }
+}

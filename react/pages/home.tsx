@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <DefaultLayout>
       <div className={styles['container']}>
-        <Title className={styles['title-1']}>Hello! I'm Dmytro Karpus</Title>
+        <Title className={styles['title-1']}>Hello! I&apos;m Dmytro Karpus</Title>
         <div className={styles['description']}>
           <Image src={"me.jpg"} alt={"My photo"} preview={false} className={styles["image"]}/>
 
