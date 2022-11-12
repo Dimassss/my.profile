@@ -8,9 +8,11 @@ import TimechartViewbox from "./TimechartViewbox"
 interface Props extends PropsWithChildren{
     data: TimechartElementType[]
     rows: number
+    width: number,
+    height: number
 }
 
-export default function TimechartContainer({data, rows, children}: Props){
+export default function TimechartContainer({data, rows, width, height, children}: Props){
     //calculating dataStart and dataEnd
     let a = +Math.min(...data.map(d => d.start))
     let b = +Math.max(...data.map(el => el.end))
@@ -42,15 +44,17 @@ export default function TimechartContainer({data, rows, children}: Props){
     useEffect(() => {
         setTimechartContextConfig({
             ...timechartContextConfig,
-            rows
+            rows, width, height
         })
-    }, [rows])
+    }, [rows, width, height])
 
     const [timechartContextConfig, setTimechartContextConfig] = useState({
         dataStart,
         dataEnd,
         dataDelta: dataEnd - dataStart,
-        rows,
+        rows, 
+        width, 
+        height,
         updateContext: (cfg: TimechartContextConfigUpdateType) => {
             setTimechartContextConfig(({...timechartContextConfig, ...cfg}))
         }

@@ -102,10 +102,13 @@ export default function Timechart({data, groups}: Props){
     }, [data, groups])
 
 
-    return (<TimechartContainer data={data} rows={groupsHeights.reduce((a,b) => a+b, 0)}>
+    return (<TimechartContainer 
+        data={data} 
+        rows={groupsHeights.reduce((a,b) => a+b, 0)}
+        width={800}
+        height={80}
+    >
         <TimechartViewbox
-            width={800}
-            height={80}
             start={start}
             end={end}
         >{
