@@ -8,6 +8,7 @@ const timechartContextConfig: TimechartContextConfigType = {
     rows: 0,
     width: 1,
     height: 1,
+    displayNames: true,
     updateContext: (cfg) => {}
 }
 
