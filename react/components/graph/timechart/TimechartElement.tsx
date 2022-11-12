@@ -1,5 +1,5 @@
-import TimechartContext, { TimechartContextConfigType } from "./timechart-context"
-import { TimechartElementType } from "./timechart.types"
+import TimechartContext from "./timechart-context"
+import { TimechartContextConfigType, TimechartElementType } from "./timechart.types"
 
 interface Props {
     el: TimechartElementType,
@@ -27,7 +27,7 @@ export default function TimechartElement({el, h, y}: Props){
                     x={elX} 
                     fill="rgba(255,0,0,0.7)"
                 />
-                <text x={tX} y={tY}>{el.name}</text>
+                {el.name ? <text x={tX} y={tY}>{el.name}</text> : undefined}
             </g>)
         }
     }</TimechartContext.Consumer>)

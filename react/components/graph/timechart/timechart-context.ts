@@ -1,21 +1,5 @@
 import React from "react"
-
-export type TimechartContextConfigUpdateType = {
-    dataStart?: number,
-    dataEnd?: number,
-    dataDelta?: number,
-    rows?: number,           //number of rows in timechart
-}
-
-export type TimechartContextConfigType = {
-    dataStart: number,
-    dataEnd: number,
-    dataDelta: number,
-    rows: number,           //number of rows in timechart
-    width: number,          //container width in px
-    height: number,         //container height in px
-    updateContext: (cfg: TimechartContextConfigUpdateType) => void
-}
+import { TimechartContextConfigType } from "./timechart.types"
 
 const timechartContextConfig: TimechartContextConfigType = {
     dataStart: 0, 

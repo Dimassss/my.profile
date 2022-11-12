@@ -1,9 +1,6 @@
 import { PropsWithChildren, useEffect, useState } from "react"
-import styles from "../../../styles/components/graph/timechart/Timechart.module.scss"
-import TimechartContext, { TimechartContextConfigType, TimechartContextConfigUpdateType } from "./timechart-context"
-import { TimechartElementType } from "./timechart.types"
-import TimechartElement from "./TimechartElement"
-import TimechartViewbox from "./TimechartViewbox"
+import TimechartContext from "./timechart-context"
+import { TimechartContextConfigType, TimechartContextConfigUpdateType, TimechartElementType } from "./timechart.types"
 
 interface Props extends PropsWithChildren{
     data: TimechartElementType[]

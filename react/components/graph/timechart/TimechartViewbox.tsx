@@ -1,15 +1,17 @@
 import { PropsWithChildren, useEffect, useState } from "react"
 import styles from "../../../styles/components/graph/timechart/TimechartViebox.module.scss"
-import TimechartContext, { TimechartContextConfigType } from "./timechart-context"
-import { TimechartElementType } from "./timechart.types"
-import TimechartElement from "./TimechartElement"
+import TimechartContext from "./timechart-context"
+import { TimechartContextConfigType, TimechartElementType } from "./timechart.types"
+import TimechartGroup from "./TimechartGroup"
 
 interface Props extends PropsWithChildren{
     start: number   //timestamp
     end: number     //timestamp
+    dataGroups: TimechartElementType[][]
+    groupsHeights: number[]
 }
 
-export default function TimechartViewbox({start, end, children}: Props){
+export default function TimechartViewbox({start, end, children, dataGroups, groupsHeights}: Props){
 
     return (<TimechartContext.Consumer>{
         ({dataDelta, dataStart, dataEnd, width, height, rows}: TimechartContextConfigType) => {
@@ -29,6 +31,13 @@ export default function TimechartViewbox({start, end, children}: Props){
                         line-height: ${0.8 * height/rows}px;
                     }
                 `}</style>
+                {
+                    dataGroups.map((dataGroup,i) => (<TimechartGroup 
+                        key={i}
+                        data={dataGroup} 
+                        rowOffsetY={groupsHeights.filter((el,j) => j < i).reduce((a,b) => a+b, 0)}
+                    />))
+                }
                 {children}
             </svg>)  
         }
