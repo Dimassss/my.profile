@@ -3,13 +3,14 @@ import TimechartContext from "./timechart-context"
 import { TimechartContextConfigType, TimechartContextConfigUpdateType, TimechartElementType } from "./timechart.types"
 
 interface Props extends PropsWithChildren{
-    data: TimechartElementType[]
-    rows: number
+    data: TimechartElementType[],
+    rows: number,
     width: number,
-    height: number
+    height: number,
+    displayNames: boolean,
 }
 
-export default function TimechartContainer({data, rows, width, height, children}: Props){
+export default function TimechartContainer({data, rows, width, height, children, displayNames}: Props){
     //calculating dataStart and dataEnd
     let a = +Math.min(...data.map(d => d.start))
     let b = +Math.max(...data.map(el => el.end))
@@ -41,9 +42,9 @@ export default function TimechartContainer({data, rows, width, height, children}
     useEffect(() => {
         setTimechartContextConfig({
             ...timechartContextConfig,
-            rows, width, height
+            rows, width, height, displayNames
         })
-    }, [rows, width, height])
+    }, [rows, width, height, displayNames])
 
     const [timechartContextConfig, setTimechartContextConfig] = useState({
         dataStart,
@@ -52,6 +53,7 @@ export default function TimechartContainer({data, rows, width, height, children}
         rows, 
         width, 
         height,
+        displayNames,
         updateContext: (cfg: TimechartContextConfigUpdateType) => {
             setTimechartContextConfig(({...timechartContextConfig, ...cfg}))
         }

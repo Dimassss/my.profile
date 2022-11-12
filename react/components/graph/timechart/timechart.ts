@@ -69,7 +69,7 @@ export const useTimechartData = (data: TimechartElementType[], groups: string[])
             dataGroup => dataGroup.length > 0 ? Math.max(...dataGroup.map(el => el.row as number)) + 1 : 0
         )
 
-        return {start, end, dataGroups, groupsHeights}
+        return {minVal: start, maxVal: end, dataGroups, groupsHeights}
     }
     
     const [timechartData, setTimechartData] = useState(prepareData(data, groups))

@@ -8,10 +8,10 @@ export type TimechartElementType = {
 
 export type useTimechartDataReturnType = [
     {
-        start: number;
-        end: number;
-        dataGroups: TimechartElementType[][];
-        groupsHeights: number[];
+        dataGroups: TimechartElementType[][],
+        groupsHeights: number[],
+        minVal: number,
+        maxVal: number
     },
     (data: TimechartElementType[], groups: string[]) => void
 ]
@@ -30,5 +30,6 @@ export type TimechartContextConfigType = {
     rows: number,           //number of rows in timechart
     width: number,          //container width in px
     height: number,         //container height in px
+    displayNames: boolean,
     updateContext: (cfg: TimechartContextConfigUpdateType) => void
 }

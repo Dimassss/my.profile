@@ -9,7 +9,7 @@ interface Props {
 
 export default function TimechartElement({el, h, y}: Props){
     return (<TimechartContext.Consumer>{
-        ({dataDelta, dataStart, dataEnd, width, height}: TimechartContextConfigType) => {
+        ({dataDelta, dataStart, dataEnd, width, height, displayNames}: TimechartContextConfigType) => {
             const drawStart = dataStart !== undefined ? dataStart : el.start
             const drawEnd = dataEnd !== undefined ? dataEnd : el.end
             
@@ -27,7 +27,7 @@ export default function TimechartElement({el, h, y}: Props){
                     x={elX} 
                     fill="rgba(255,0,0,0.7)"
                 />
-                {el.name ? <text x={tX} y={tY}>{el.name}</text> : undefined}
+                {el.name && displayNames ? <text x={tX} y={tY}>{el.name}</text> : undefined}
             </g>)
         }
     }</TimechartContext.Consumer>)

@@ -2,6 +2,7 @@ import { LoadingOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
 import { useEffect, useState } from "react";
 import Timechart from "../components/graph/timechart/Timechart";
+import TimechartSelector from "../components/graph/timechart/TimechartSelector";
 import Center from "../components/positioning/Center";
 import DefaultLayout from "../layouts/DefaultLayout";
 import axios from "../plugins/axios";
@@ -33,7 +34,12 @@ export default function TimechartPage(){
             ? (<Center height="100vh">
                 <Spin indicator={<LoadingOutlined style={{ fontSize: '3em' }} spin />} />
             </Center>)
-            : (<Center height="100vh"><Timechart data={data} groups={['1', '2', '3']}/></Center>)
+            : (<Center height="100vh">
+                    <TimechartSelector
+                        data={data} 
+                        groups={['1', '2', '3']}
+                    />
+            </Center>)
         }
     </DefaultLayout>)
 }
