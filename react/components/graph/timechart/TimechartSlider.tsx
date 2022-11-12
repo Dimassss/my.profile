@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import TimechartContext from "./timechart-context";
 
 interface Props {
@@ -24,6 +24,11 @@ export default function TimechartSlider({width = 800, height = 80}: Props){
     const [movingStart, setMovingStart] = useState(start)
     const [movingEnd, setMovingEnd] = useState(end)
     const [startPosition, setStartPosition] = useState(null as any)
+
+    useEffect(() => {
+        setEnd(width)
+        setMovingEnd(width)
+    }, [width])
 
     const boundVal = (a:number, b:number, val:number) => Math.min(b, Math.max(a, val))
     const onStartMoving = (e:any, side: -1 | 1) => {
@@ -61,8 +66,9 @@ export default function TimechartSlider({width = 800, height = 80}: Props){
         setEnd(width)
     }, [width])
     
+    const {dataStart, dataEnd, dataDelta} = useContext(TimechartContext)
 
-    return (<TimechartContext.Consumer>{({dataStart, dataEnd, dataDelta}) => (<g onMouseLeave={onEndMoving} onMouseUp={onEndMoving} onMouseMove={onMoving}>
+    return (<g onMouseLeave={onEndMoving} onMouseUp={onEndMoving} onMouseMove={onMoving}>
         <rect 
             x={0} 
             y={0} 
@@ -120,5 +126,5 @@ export default function TimechartSlider({width = 800, height = 80}: Props){
                 getDate(dataStart + dataDelta * (movingEnd / width))
             }</text>
         </g>
-    </g>)}</TimechartContext.Consumer>)
+    </g>)
 }

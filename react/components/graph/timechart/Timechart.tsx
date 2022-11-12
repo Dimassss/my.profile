@@ -26,13 +26,12 @@ export default function Timechart({
     end,
     displayNames = true
 }: Props){
-    const [{minVal, maxVal, dataGroups, groupsHeights}, setTimechartData] = useTimechartData(data, groups)
-    
+    const [{minVal, maxVal, dataGroups, groupsHeights}, setTimechartData] = useTimechartData(data, groups)    
 
     useEffect(() => {
         setTimechartData(data, groups)
     }, [data, groups])
-
+    
 
     return (<TimechartContainer 
         data={data} 

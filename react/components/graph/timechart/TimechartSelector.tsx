@@ -17,6 +17,7 @@ interface Props {
 
 
 export default function TimechartSelector({data, groups, width = 800, height = 80}: Props){
+
     return (<Timechart
         data={data}
         groups={groups}
