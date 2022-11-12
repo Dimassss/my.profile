@@ -1,22 +1,18 @@
-import { useEffect, useState } from "react"
-import styles from "../../../styles/components/graph/timechart/Timechart.module.scss"
 import Timechart from "./Timechart"
-import { useTimechartData } from "./timechart"
 import { TimechartElementType } from "./timechart.types"
-import TimechartContainer from "./TimechartContainer"
-import TimechartGroup from "./TimechartGroup"
 import TimechartSlider from "./TimechartSlider"
-import TimechartViewbox from "./TimechartViewbox"
 
 interface Props {
     data: TimechartElementType[],
     groups: string[],
     width?: number,
-    height?: number
+    height?: number,
+    name: string | number,          //must be unique
+    onChange?: (start: number, end: number) => void
 }
 
 
-export default function TimechartSelector({data, groups, width = 800, height = 80}: Props){
+export default function TimechartSelector({data, groups, name, width = 800, height = 80, onChange = () => {}}: Props){
 
     return (<Timechart
         data={data}
@@ -24,7 +20,10 @@ export default function TimechartSelector({data, groups, width = 800, height = 8
         width={width}
         height={height}
         displayNames={false}
+        name={'selector-'+name}
     >
-        <TimechartSlider width={width} height={height}/>
+        <TimechartSlider width={width} height={height} onChange={(s,e) => {
+            onChange(s,e)
+        }}/>
     </Timechart>)
 }

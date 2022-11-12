@@ -1,7 +1,7 @@
 import { PropsWithChildren, useContext, useEffect, useState } from "react"
-import styles from "../../../styles/components/graph/timechart/TimechartViebox.module.scss"
 import TimechartContext from "./timechart-context"
-import { TimechartContextConfigType, TimechartElementType } from "./timechart.types"
+import TimechartViewboxContext from "./timechart-viewbox-context"
+import { TimechartElementType } from "./timechart.types"
 import TimechartGroup from "./TimechartGroup"
 
 interface Props extends PropsWithChildren{
@@ -11,32 +11,53 @@ interface Props extends PropsWithChildren{
     groupsHeights: number[]
 }
 
+const styleClasses: string[] = []
+
 export default function TimechartViewbox({start, end, children, dataGroups, groupsHeights}: Props){
-    const {dataDelta, dataStart, dataEnd, width, height, rows} = useContext(TimechartContext)
+    const {dataStart, dataEnd, width, height, rows, name} = useContext(TimechartContext)
 
-    const drawStart = isNaN(+start) ? +start : +dataStart
-    const drawEnd = isNaN(+end) ? +end : +dataEnd
+    const styleClass = `svg-container-${name}`
 
-    return (<svg 
-        viewBox={`${width * (drawStart-dataStart) / dataDelta} 0 ${width * (drawEnd - dataStart) / dataDelta} ${height}`}         //real full viewbox is 0 0 1 1
-        width={width} 
-        height={height} 
-        style={{background: "#ccc"}}
-        preserveAspectRatio="none"
-    >
-        <style>{`
-            text {
-                font-size: ${0.6 * height/rows}px;
-                line-height: ${0.8 * height/rows}px;
-            }
-        `}</style>
-        {
-            dataGroups.map((dataGroup,i) => (<TimechartGroup 
-                key={i}
-                data={dataGroup} 
-                rowOffsetY={groupsHeights.filter((el,j) => j < i).reduce((a,b) => a+b, 0)}
-            />))
-        }
-        {children}
-    </svg>)
+    return (<TimechartViewboxContext.Provider value={{
+            start: start == undefined ? dataStart : start, 
+            end: end == undefined ? dataEnd : end,
+        }}>
+        <svg 
+            viewBox={`${0} 0 ${width} ${height}`}
+            width={width} 
+            height={height} 
+            style={{background: "#ccc"}}
+            preserveAspectRatio="none"
+        >
+            <style>{`
+                .${styleClass} g.el-text text {
+                    font-size: 1em;
+                    line-height: 1em;
+                    text-anchor: start;
+                    transform: rotate(270deg);
+                    fill: #222
+                }
+            `}</style>
+            <defs>
+                <filter id="glow" x="-10%" y="-10%" width="160%" height="160%">
+                    <feGaussianBlur stdDeviation="1 1" result="glow"/>
+                    <feMerge>
+                        <feMergeNode in="glow"/>
+                        <feMergeNode in="glow"/>
+                        <feMergeNode in="glow"/>
+                    </feMerge>
+                </filter>
+            </defs>
+            <g className={styleClass}>
+                {
+                    dataGroups.map((dataGroup,i) => (<TimechartGroup 
+                        key={i}
+                        data={dataGroup} 
+                        rowOffsetY={groupsHeights.filter((el,j) => j < i).reduce((a,b) => a+b, 0)}
+                    />))
+                }
+                {children}
+            </g>
+        </svg>
+    </TimechartViewboxContext.Provider>)
 }

@@ -12,7 +12,8 @@ interface Props extends PropsWithChildren{
     height?: number,
     start?: number,
     end?: number,
-    displayNames?: boolean
+    displayNames?: boolean,
+    name: string | number
 }
 
 
@@ -24,14 +25,17 @@ export default function Timechart({
     children,
     start,
     end,
-    displayNames = true
+    displayNames = true,
+    name
 }: Props){
     const [{minVal, maxVal, dataGroups, groupsHeights}, setTimechartData] = useTimechartData(data, groups)    
+
+    const s = start == undefined ? minVal : Math.min(Math.max(minVal, start), maxVal)
+    const e = end == undefined ? maxVal : Math.max(Math.min(maxVal, end), minVal+1)
 
     useEffect(() => {
         setTimechartData(data, groups)
     }, [data, groups])
-    
 
     return (<TimechartContainer 
         data={data} 
@@ -39,10 +43,11 @@ export default function Timechart({
         width={width}
         height={height}
         displayNames={displayNames}
+        name={name}
     >
         <TimechartViewbox
-            start={start == undefined ? minVal : start}
-            end={end == undefined ? maxVal : end}
+            start={s}
+            end={e}
             dataGroups={dataGroups}
             groupsHeights={groupsHeights}
         >{children}</TimechartViewbox>

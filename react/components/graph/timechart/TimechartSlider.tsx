@@ -3,7 +3,8 @@ import TimechartContext from "./timechart-context";
 
 interface Props {
     width?: number,
-    height?: number
+    height?: number,
+    onChange?: (start: number, end: number) => void
 }
 
 const getDate = (timestamp: number) => {
@@ -17,13 +18,14 @@ const getDate = (timestamp: number) => {
     return `${day+1} ${monthTbl[month]} ${year}`
 }
 
-export default function TimechartSlider({width = 800, height = 80}: Props){
+export default function TimechartSlider({width = 800, height = 80, onChange = () => {}}: Props){
     const sliderWidth = 10;
     const [start, setStart] = useState(0)       //px
     const [end, setEnd] = useState(width)       //px
     const [movingStart, setMovingStart] = useState(start)
     const [movingEnd, setMovingEnd] = useState(end)
     const [startPosition, setStartPosition] = useState(null as any)
+    const {dataStart, dataEnd, dataDelta} = useContext(TimechartContext)
 
     useEffect(() => {
         setEnd(width)
@@ -65,8 +67,14 @@ export default function TimechartSlider({width = 800, height = 80}: Props){
     useEffect(() => {
         setEnd(width)
     }, [width])
+
+    useEffect(() => {
+        onChange(
+            dataStart + dataDelta * movingStart / width, 
+            dataStart + dataDelta * movingEnd / width
+        )
+    }, [movingEnd, movingStart, dataStart, dataDelta])
     
-    const {dataStart, dataEnd, dataDelta} = useContext(TimechartContext)
 
     return (<g onMouseLeave={onEndMoving} onMouseUp={onEndMoving} onMouseMove={onMoving}>
         <rect 

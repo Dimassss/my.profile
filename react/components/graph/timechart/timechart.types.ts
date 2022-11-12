@@ -16,13 +16,6 @@ export type useTimechartDataReturnType = [
     (data: TimechartElementType[], groups: string[]) => void
 ]
 
-export type TimechartContextConfigUpdateType = {
-    dataStart?: number,
-    dataEnd?: number,
-    dataDelta?: number,
-    rows?: number,           //number of rows in timechart
-}
-
 export type TimechartContextConfigType = {
     dataStart: number,
     dataEnd: number,
@@ -31,5 +24,6 @@ export type TimechartContextConfigType = {
     width: number,          //container width in px
     height: number,         //container height in px
     displayNames: boolean,
-    updateContext: (cfg: TimechartContextConfigUpdateType) => void
+    name: string | number,
+    updateContext: (cfg: TimechartContextConfigType) => void
 }

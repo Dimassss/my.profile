@@ -1,6 +1,7 @@
 import { useContext } from "react"
 import TimechartContext from "./timechart-context"
-import { TimechartContextConfigType, TimechartElementType } from "./timechart.types"
+import TimechartViewboxContext from "./timechart-viewbox-context"
+import { TimechartElementType } from "./timechart.types"
 
 interface Props {
     el: TimechartElementType,
@@ -9,26 +10,35 @@ interface Props {
 }
 
 export default function TimechartElement({el, h, y}: Props){
-    const {dataDelta, dataStart, dataEnd, width, height, displayNames} = useContext(TimechartContext)
-
-    const drawStart = dataStart !== undefined ? dataStart : el.start
-    const drawEnd = dataEnd !== undefined ? dataEnd : el.end
+    const {width, height, displayNames} = useContext(TimechartContext)
+    const {start, end} = useContext(TimechartViewboxContext)
     
     const elY = height * (y + h * 0.1)
-    const elX = width * (el.start - drawStart) / (drawEnd - drawStart)
+    const elX = width * (el.start - start) / (end - start)
     const elH = height * h * 0.8
-    const tY = elY + height * h * 0.6
-    const tX = elX + 2
+    const elW = width * (el.end - el.start) / (end - start)
+    const tY = 0.95 * elH
+    const tX = 2
 
-    return (<g>
+    return (<g transform={`translate(${elX}, ${elY})`}>
         <rect
-            width={width * (el.end - el.start) / (drawEnd - drawStart)} 
+            width={elW} 
             height={elH} 
-            y={elY} 
-            x={elX} 
+            y={0} 
+            x={0} 
             fill="rgba(255,0,0,0.7)"
         />
-        {el.name && displayNames ? <text x={tX} y={tY}>{el.name}</text> : undefined}
+        {el.name && displayNames 
+            ? (<g transform={`translate(${tX}, ${tY})`} className={"el-text"}>
+                <text x={0} y={0} width={elH} style={{filter: "url(#glow)", fill: "#fff"}}>
+                    {el.name.split(' ').map(t => (<tspan x={0} dy={"1em"}>{t}</tspan>))}
+                </text>
+                <text x={0} y={0} width={elH}>
+                    {el.name.split(' ').map(t => (<tspan x={0} dy={"1em"}>{t}</tspan>))}
+                </text>
+            </g>)
+            : undefined
+        }
     </g>)
 
     

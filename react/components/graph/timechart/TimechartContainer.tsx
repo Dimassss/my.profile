@@ -1,6 +1,6 @@
 import { PropsWithChildren, useEffect, useState } from "react"
 import TimechartContext from "./timechart-context"
-import { TimechartContextConfigType, TimechartContextConfigUpdateType, TimechartElementType } from "./timechart.types"
+import { TimechartContextConfigType, TimechartElementType } from "./timechart.types"
 
 interface Props extends PropsWithChildren{
     data: TimechartElementType[],
@@ -8,9 +8,10 @@ interface Props extends PropsWithChildren{
     width: number,
     height: number,
     displayNames: boolean,
+    name: string | number       //must be unique
 }
 
-export default function TimechartContainer({data, rows, width, height, children, displayNames}: Props){
+export default function TimechartContainer({data, rows, width, height, children, displayNames, name}: Props){
     //calculating dataStart and dataEnd
     let a = +Math.min(...data.map(d => d.start))
     let b = +Math.max(...data.map(el => el.end))
@@ -28,8 +29,9 @@ export default function TimechartContainer({data, rows, width, height, children,
         width, 
         height,
         displayNames,
-        updateContext: (cfg: TimechartContextConfigUpdateType) => {
-            setTimechartContextConfig(({...timechartContextConfig, ...cfg}))
+        name,
+        updateContext: (cfg: TimechartContextConfigType) => {
+            setTimechartContextConfig(cfg)
         }
     } as TimechartContextConfigType)
 
@@ -52,11 +54,12 @@ export default function TimechartContainer({data, rows, width, height, children,
             width, 
             height,
             displayNames,
+            name,
             updateContext: (cfg: TimechartContextConfigType) => {
                 setTimechartContextConfig(cfg)
             }
         } as TimechartContextConfigType)
-    }, [dataStart, dataEnd, rows, width, height, displayNames])
+    }, [dataStart, dataEnd, rows, width, height, displayNames, name])
 
     return (<TimechartContext.Provider value={timechartContextConfig}>
         {children}
