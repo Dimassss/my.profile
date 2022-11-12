@@ -6,8 +6,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
     const r = await axios.post(`https://www.google.com/recaptcha/api/siteverify?secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${token}`)
 
-    console.log(r.data.success)
-
     res.status(200)
     if (r.data.success) {
         res.send(true);
