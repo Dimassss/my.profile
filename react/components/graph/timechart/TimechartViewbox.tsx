@@ -14,7 +14,7 @@ interface Props extends PropsWithChildren{
 const styleClasses: string[] = []
 
 export default function TimechartViewbox({start, end, children, dataGroups, groupsHeights}: Props){
-    const {dataStart, dataEnd, width, height, rows, name} = useContext(TimechartContext)
+    const {dataStart, dataEnd, width, height, rows, name, groups} = useContext(TimechartContext)
 
     const styleClass = `svg-container-${name}`
 
@@ -26,7 +26,7 @@ export default function TimechartViewbox({start, end, children, dataGroups, grou
             viewBox={`${0} 0 ${width} ${height}`}
             width={width} 
             height={height} 
-            style={{background: "#ccc"}}
+            style={{background: "rgba(0,0,0,0)", verticalAlign:"top"}}
             preserveAspectRatio="none"
         >
             <style>{`
@@ -37,6 +37,12 @@ export default function TimechartViewbox({start, end, children, dataGroups, grou
                     transform: rotate(270deg);
                     fill: #222
                 }
+
+                ${groups.map(g => {
+                    return `.group-${g.name} rect {
+                        fill: ${g.color};
+                    }`
+                }).join("\n")}
             `}</style>
             <defs>
                 <filter id="glow" x="-10%" y="-10%" width="160%" height="160%">
@@ -50,8 +56,9 @@ export default function TimechartViewbox({start, end, children, dataGroups, grou
             </defs>
             <g className={styleClass}>
                 {
-                    dataGroups.map((dataGroup,i) => (<TimechartGroup 
-                        key={i}
+                    dataGroups.map((dataGroup,i) => (<TimechartGroup
+                        name={dataGroup[0] ? dataGroup[0].group as string : `subs-${i+1}`}
+                        key={dataGroup[0] ? dataGroup[0].group as string : `subs-${i+1}`}
                         data={dataGroup} 
                         rowOffsetY={groupsHeights.filter((el,j) => j < i).reduce((a,b) => a+b, 0)}
                     />))

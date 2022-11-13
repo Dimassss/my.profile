@@ -26,15 +26,14 @@ export default function TimechartElement({el, h, y}: Props){
             height={elH} 
             y={0} 
             x={0} 
-            fill="rgba(255,0,0,0.7)"
         />
         {el.name && displayNames 
             ? (<g transform={`translate(${tX}, ${tY})`} className={"el-text"}>
                 <text x={0} y={0} width={elH} style={{filter: "url(#glow)", fill: "#fff"}}>
-                    {el.name.split(' ').map(t => (<tspan x={0} dy={"1em"}>{t}</tspan>))}
+                    {el.name.split(' ').map(t => (<tspan x={0} dy={"1em"} key={t}>{t}</tspan>))}
                 </text>
                 <text x={0} y={0} width={elH}>
-                    {el.name.split(' ').map(t => (<tspan x={0} dy={"1em"}>{t}</tspan>))}
+                    {el.name.split(' ').map(t => (<tspan x={0} dy={"1em"} key={t}>{t}</tspan>))}
                 </text>
             </g>)
             : undefined

@@ -6,12 +6,13 @@ import TimechartElement from "./TimechartElement";
 interface Props extends PropsWithChildren {
     data: TimechartElementType[],      //height
     rowOffsetY?: number
+    name: string | null
 }
 
-export default function TimechartGroup({data, rowOffsetY = 0}: Props){
+export default function TimechartGroup({data, rowOffsetY = 0, name}: Props){
     const {rows} = useContext(TimechartContext)
 
-    return (<g>{
+    return (<g className={name ? `group-${name}` : undefined}>{
         data.map(el => {
             return (<TimechartElement
                 key={`${el.name}: ${el.start}-${el.end}`}

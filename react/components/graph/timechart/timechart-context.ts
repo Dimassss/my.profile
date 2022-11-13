@@ -10,6 +10,7 @@ const timechartContextConfig: TimechartContextConfigType = {
     height: 1,
     displayNames: true,
     name: 0,
+    groups: [],
     updateContext: (cfg) => {}
 }
 

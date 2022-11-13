@@ -1,6 +1,6 @@
 import { PropsWithChildren, useEffect, useState } from "react"
 import TimechartContext from "./timechart-context"
-import { TimechartContextConfigType, TimechartElementType } from "./timechart.types"
+import { TimechartContextConfigType, TimechartElementType, TimechartGroupType } from "./timechart.types"
 
 interface Props extends PropsWithChildren{
     data: TimechartElementType[],
@@ -9,9 +9,10 @@ interface Props extends PropsWithChildren{
     height: number,
     displayNames: boolean,
     name: string | number       //must be unique
+    groups: TimechartGroupType[]
 }
 
-export default function TimechartContainer({data, rows, width, height, children, displayNames, name}: Props){
+export default function TimechartContainer({data, rows, width, height, children, displayNames, name, groups}: Props){
     //calculating dataStart and dataEnd
     let a = +Math.min(...data.map(d => d.start))
     let b = +Math.max(...data.map(el => el.end))
@@ -30,6 +31,7 @@ export default function TimechartContainer({data, rows, width, height, children,
         height,
         displayNames,
         name,
+        groups,
         updateContext: (cfg: TimechartContextConfigType) => {
             setTimechartContextConfig(cfg)
         }
@@ -55,6 +57,7 @@ export default function TimechartContainer({data, rows, width, height, children,
             height,
             displayNames,
             name,
+            groups,
             updateContext: (cfg: TimechartContextConfigType) => {
                 setTimechartContextConfig(cfg)
             }

@@ -1,10 +1,10 @@
 import Timechart from "./Timechart"
-import { TimechartElementType } from "./timechart.types"
+import { TimechartElementType, TimechartGroupType } from "./timechart.types"
 import TimechartSlider from "./TimechartSlider"
 
 interface Props {
     data: TimechartElementType[],
-    groups: string[],
+    groups: TimechartGroupType[],
     width?: number,
     height?: number,
     name: string | number,          //must be unique

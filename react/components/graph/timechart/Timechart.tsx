@@ -1,19 +1,22 @@
 import { PropsWithChildren, useEffect, useState } from "react"
 import styles from "../../../styles/components/graph/timechart/Timechart.module.scss"
 import { useTimechartData } from "./timechart"
-import { TimechartElementType } from "./timechart.types"
+import { TimechartElementType, TimechartGroupType } from "./timechart.types"
 import TimechartContainer from "./TimechartContainer"
 import TimechartViewbox from "./TimechartViewbox"
 
+type onDrawProps = any
+
 interface Props extends PropsWithChildren{
     data: TimechartElementType[],
-    groups: string[],
+    groups: TimechartGroupType[],
     width?: number,
     height?: number,
     start?: number,
     end?: number,
     displayNames?: boolean,
-    name: string | number
+    name: string | number,
+    onDraw?: (cfg: onDrawProps) => void
 }
 
 
@@ -26,9 +29,14 @@ export default function Timechart({
     start,
     end,
     displayNames = true,
-    name
+    name,
+    onDraw = () => {}
 }: Props){
     const [{minVal, maxVal, dataGroups, groupsHeights}, setTimechartData] = useTimechartData(data, groups)    
+
+    useEffect(() => {
+        onDraw({rows: groupsHeights.reduce((a,b) => a+b, 0)})
+    }, [groupsHeights])
 
     const s = start == undefined ? minVal : Math.min(Math.max(minVal, start), maxVal)
     const e = end == undefined ? maxVal : Math.max(Math.min(maxVal, end), minVal+1)
@@ -44,6 +52,7 @@ export default function Timechart({
         height={height}
         displayNames={displayNames}
         name={name}
+        groups={groups}
     >
         <TimechartViewbox
             start={s}

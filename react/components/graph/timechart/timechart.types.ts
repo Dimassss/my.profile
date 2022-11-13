@@ -1,9 +1,14 @@
+export type TimechartGroupType = {
+    name: string,
+    color: string,
+}
+
 export type TimechartElementType = {
     name: string, 
     start: number,  //timestamp
     end: number,
     row?: number    //row number in its group
-    group?: string
+    group: string
 }
 
 export type useTimechartDataReturnType = [
@@ -13,7 +18,7 @@ export type useTimechartDataReturnType = [
         minVal: number,
         maxVal: number
     },
-    (data: TimechartElementType[], groups: string[]) => void
+    (data: TimechartElementType[], groups: TimechartGroupType[]) => void
 ]
 
 export type TimechartContextConfigType = {
@@ -25,5 +30,6 @@ export type TimechartContextConfigType = {
     height: number,         //container height in px
     displayNames: boolean,
     name: string | number,
+    groups: TimechartGroupType[],
     updateContext: (cfg: TimechartContextConfigType) => void
 }

@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { TimechartElementType, useTimechartDataReturnType } from "./timechart.types"
+import { TimechartElementType, TimechartGroupType, useTimechartDataReturnType } from "./timechart.types"
 
 const setRowsInElements = (data: TimechartElementType[]) => {
     if(data.length == 0) return data
@@ -56,13 +56,13 @@ const setRowsInElements = (data: TimechartElementType[]) => {
     return data
 }
 
-export const useTimechartData = (data: TimechartElementType[], groups: string[]): useTimechartDataReturnType => {
-    const prepareData = (data: TimechartElementType[], groups: string[]) => {
+export const useTimechartData = (data: TimechartElementType[], groups: TimechartGroupType[]): useTimechartDataReturnType => {
+    const prepareData = (data: TimechartElementType[], groups: TimechartGroupType[]) => {
         let start = data.length > 0 ? +Math.min(...data.map(el => el.start)) : 0
         let end = data.length > 0 ? +Math.max(...data.map(el => el.end)) : 1
 
         const dataGroups = groups.map(gr => {
-            return setRowsInElements(data.filter(el => el.group == gr))
+            return setRowsInElements(data.filter(el => el.group == gr.name))
         })
 
         const groupsHeights = dataGroups.map(
@@ -76,6 +76,6 @@ export const useTimechartData = (data: TimechartElementType[], groups: string[])
 
     return [
         timechartData,
-        (data: TimechartElementType[], groups: string[]) => setTimechartData(prepareData(data, groups))
+        (data: TimechartElementType[], groups: TimechartGroupType[]) => setTimechartData(prepareData(data, groups))
     ]
 }
