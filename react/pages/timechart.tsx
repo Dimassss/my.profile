@@ -8,6 +8,8 @@ import DefaultLayout from "../layouts/DefaultLayout";
 import axios from "../plugins/axios";
 import styles from '../styles/pages/timechart.module.scss'
 
+
+//https://m2.material.io/resources/color/#!/?view.left=0&view.right=0&primary.color=880E4F&secondary.color=4A148C&secondary.text.color=ffffff
 const pallets = [
     ["#880e4f", "#3e2723", "#263238", "#4a148c", "#006064", "#004d40", "#560027"],
     ["#002171", "#002f6c", "#1b5e20", "#33691e", "#827717", "#bc5100", "#ff6f00", "#e65100", "#bf360c"]
@@ -35,6 +37,12 @@ export default function TimechartPage(){
     const containerWidth = (defW: number) => containerRef.current ? Math.max(20, containerRef.current.clientWidth) : defW
 
     useEffect(() => {
+
+        window.onresize = () => {
+            setForceUpdate({})
+        }
+
+
         setIsFetching(true)
 
         axios.get('knowledge').then((res) => {
@@ -49,12 +57,6 @@ export default function TimechartPage(){
             setData(d)
             setIsFetching(false)
         })
-    }, [])
-
-    useEffect(() => {
-        window.onresize = () => {
-            setForceUpdate({})
-        }
     }, [])
 
     return (<DefaultLayout>

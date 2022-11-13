@@ -15,6 +15,11 @@ const styleClasses: string[] = []
 
 export default function TimechartViewbox({start, end, children, dataGroups, groupsHeights}: Props){
     const {dataStart, dataEnd, width, height, rows, name, groups} = useContext(TimechartContext)
+    const [forceUpdate, setForceUpdate] = useState(1)
+
+    useEffect(() => {
+        setForceUpdate(forceUpdate+1 % 100)
+    }, [height])
 
     const styleClass = `svg-container-${name}`
 
@@ -23,10 +28,14 @@ export default function TimechartViewbox({start, end, children, dataGroups, grou
             end: end == undefined ? dataEnd : end,
         }}>
         <svg 
-            viewBox={`${0} 0 ${width} ${height}`}
             width={width} 
-            height={height} 
-            style={{background: "rgba(0,0,0,0)", verticalAlign:"top"}}
+            //BUG: here component can be not updated forever, because value in ReactDOM is correct but in DOM is not. Force attr update helps 
+            height={height + forceUpdate * 0.0000001}                         
+            viewBox={`${0} 0 ${width} ${height}`}
+            style={{
+                background: "rgba(0,0,0,0)", 
+                verticalAlign:"top"
+            }}
             preserveAspectRatio="none"
         >
             <style>{`
