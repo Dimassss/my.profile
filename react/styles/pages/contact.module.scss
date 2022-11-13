@@ -1,3 +1,5 @@
+@import "../themes/colors.scss";
+
 .container {
     display: flex;
     justify-content: center;
@@ -11,11 +13,13 @@
         li {
             cursor: pointer;
             margin-top: 1em;
-            border: 1px solid #999;
+            border: 1px solid $grey-3;
             padding: 1em;
+            background-color: $grey-2;
+            color: $green-1;
 
             &:hover {
-                background-color: #ddd;
+                background-color: $grey-3;
             }
         }
     }

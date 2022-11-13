@@ -62,7 +62,7 @@ export default function TimechartContainer({data, rows, width, height, children,
                 setTimechartContextConfig(cfg)
             }
         } as TimechartContextConfigType)
-    }, [dataStart, dataEnd, rows, width, height, displayNames, name])
+    }, [dataStart, dataEnd, rows, width, height, displayNames, name, groups])
 
     return (<TimechartContext.Provider value={timechartContextConfig}>
         {children}

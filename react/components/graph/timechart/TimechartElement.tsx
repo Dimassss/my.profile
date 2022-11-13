@@ -17,7 +17,7 @@ export default function TimechartElement({el, h, y}: Props){
     const elX = width * (el.start - start) / (end - start)
     const elH = height * h * 0.8
     const elW = width * (el.end - el.start) / (end - start)
-    const tY = 0.95 * elH
+    const tY = 0.9 * elH
     const tX = 2
 
     return (<g transform={`translate(${elX}, ${elY})`}>
@@ -29,7 +29,7 @@ export default function TimechartElement({el, h, y}: Props){
         />
         {el.name && displayNames 
             ? (<g transform={`translate(${tX}, ${tY})`} className={"el-text"}>
-                <text x={0} y={0} width={elH} style={{filter: "url(#glow)", fill: "#fff"}}>
+                <text x={0} y={0} width={elH} className={"glow-duplication"}>
                     {el.name.split(' ').map(t => (<tspan x={0} dy={"1em"} key={t}>{t}</tspan>))}
                 </text>
                 <text x={0} y={0} width={elH}>

@@ -1,5 +1,12 @@
 require("dotenv").config
 
+const withLess = require("next-with-less");
+const path = require("path");
+
+const pathToLessFileWithVariables = path.resolve(
+  "styles/themes/dark.less"
+);
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
@@ -17,7 +24,11 @@ const nextConfig = {
   env: {
     RECAPTCHA_SITE_KEY: process.env.RECAPTCHA_SITE_KEY,
     RECAPTCHA_SECRET_KEY: process.env.RECAPTCHA_SECRET_KEY
-  }
+  },
+  lessLoaderOptions: {
+    additionalData: (content) =>
+      `${content}\n\n@import '${pathToLessFileWithVariables}';`,
+  },
 }
 
-module.exports = nextConfig
+module.exports = withLess(nextConfig)

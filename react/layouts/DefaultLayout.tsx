@@ -48,7 +48,6 @@ export default function DefaultLayout({children}: Props){
             collapsedWidth={"4em"}
         >
             <Menu
-                theme="dark"
                 mode="inline"
                 selectedKeys={[
                     router.pathname.split('/')[1]

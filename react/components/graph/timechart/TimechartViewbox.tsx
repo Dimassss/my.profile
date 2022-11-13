@@ -34,8 +34,14 @@ export default function TimechartViewbox({start, end, children, dataGroups, grou
                     font-size: 1em;
                     line-height: 1em;
                     text-anchor: start;
-                    transform: rotate(270deg);
-                    fill: #222
+                    transform: rotate(290deg);
+                    fill: #f57c00;
+                    font-weight: normal;
+                }
+
+                g.el-text text.glow-duplication {
+                    fill: #000;
+                    filter: url(#glow);
                 }
 
                 ${groups.map(g => {
@@ -45,10 +51,9 @@ export default function TimechartViewbox({start, end, children, dataGroups, grou
                 }).join("\n")}
             `}</style>
             <defs>
-                <filter id="glow" x="-10%" y="-10%" width="160%" height="160%">
-                    <feGaussianBlur stdDeviation="1 1" result="glow"/>
+                <filter id="glow" x="0" y="0" width="160%" height="160%">
+                    <feGaussianBlur stdDeviation="2 2" result="glow"/>
                     <feMerge>
-                        <feMergeNode in="glow"/>
                         <feMergeNode in="glow"/>
                         <feMergeNode in="glow"/>
                     </feMerge>

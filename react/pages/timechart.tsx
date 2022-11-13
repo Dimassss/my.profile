@@ -1,5 +1,5 @@
 import { LoadingOutlined } from "@ant-design/icons";
-import { Spin } from "antd";
+import { Slider, Spin } from "antd";
 import { useEffect, useRef, useState } from "react";
 import Timechart from "../components/graph/timechart/Timechart";
 import TimechartSelector from "../components/graph/timechart/TimechartSelector";
@@ -9,22 +9,28 @@ import axios from "../plugins/axios";
 import styles from '../styles/pages/timechart.module.scss'
 
 const pallets = [
-    ["#011936", "#465362", "#82A3A1", "#9FC490", "#C0DFA1"]
+    ["#880e4f", "#3e2723", "#263238", "#4a148c", "#006064", "#004d40", "#560027"],
+    ["#002171", "#002f6c", "#1b5e20", "#33691e", "#827717", "#bc5100", "#ff6f00", "#e65100", "#bf360c"]
 ]
+
+const groupsConfig = (i:number, j: number) => [
+    {name: '1', color: pallets[i][j]},
+    {name: '2', color: pallets[i][j+1]},
+    {name: '3', color: pallets[i][j+2]},
+    {name: '4', color: pallets[i][j+3]},
+    {name: '5', color: pallets[i][j+4]}
+]
+const i = 0
+const j = 0
 
 export default function TimechartPage(){
     const [data, setData] = useState([])
-    const [groups, setGroups] = useState([
-        {name: '1', color: pallets[0][0]},
-        {name: '2', color: pallets[0][1]},
-        {name: '3', color: pallets[0][2]},
-        {name: '4', color: pallets[0][2]},
-        {name: '5', color: pallets[0][2]}
-    ])
+    const [groups, setGroups] = useState(groupsConfig(i,j))
     const [isFetching, setIsFetching] = useState(false)
     const [[start, end], setDataRange] = useState([] as number[])
     const [rows, setRows] = useState(1)
     const containerRef = useRef(null as any)
+    const [forceUpdate, setForceUpdate] = useState({})
     const containerHeight = (defH: number) => typeof window !== 'undefined' ? Math.max(20, window.innerHeight) : defH
     const containerWidth = (defW: number) => containerRef.current ? Math.max(20, containerRef.current.clientWidth) : defW
 
@@ -36,13 +42,19 @@ export default function TimechartPage(){
             d = d.map((el: any, i: number) => {
                 el.start = el.learnStartTimestamp
                 el.end = el.learnEndTimestamp
-                el.group = [1, 5, 3, 1, 2, 4][i % 5].toString()
+                el.group = [1, 5, 3, 4, 2][i % 5].toString()
 
                 return el
             })
             setData(d)
             setIsFetching(false)
         })
+    }, [])
+
+    useEffect(() => {
+        window.onresize = () => {
+            setForceUpdate({})
+        }
     }, [])
 
     return (<DefaultLayout>
@@ -72,7 +84,7 @@ export default function TimechartPage(){
                             name={"preview-selector"}
                             data={data} 
                             groups={groups}
-                            width={containerWidth(800)}
+                            width={containerWidth(800) - 20}
                             height={80}
                             onChange={(s,e) => {
                                 setDataRange([s,e])

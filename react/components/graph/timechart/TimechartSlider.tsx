@@ -19,7 +19,7 @@ const getDate = (timestamp: number) => {
 }
 
 export default function TimechartSlider({width = 800, height = 80, onChange = () => {}}: Props){
-    const sliderWidth = 10;
+    const sliderWidth = 14;
     const [start, setStart] = useState(0)       //px
     const [end, setEnd] = useState(width)       //px
     const [movingStart, setMovingStart] = useState(start)
@@ -84,19 +84,35 @@ export default function TimechartSlider({width = 800, height = 80, onChange = ()
             height={height} 
             fill="rgba(0, 0, 0, 0)"
         />
+
         <rect 
             x={0} 
             y={0} 
             width={movingStart} 
             height={height} 
-            fill="rgba(0, 0, 0, 0.5)"
+            fill="rgba(0, 0, 0, 0.7)"
         />
         <rect 
             x={movingEnd} 
             y={0} 
             width={width - movingEnd} 
             height={height} 
-            fill="rgba(0, 0, 0, 0.5)"
+            fill="rgba(0, 0, 0, 0.7)"
+        />
+
+        <rect 
+            x={movingStart} 
+            y={0} 
+            width={sliderWidth} 
+            height={height} 
+            fill="rgba(255, 255, 255, 0.7)"
+        />
+        <rect 
+            x={movingEnd - sliderWidth} 
+            y={0} 
+            width={sliderWidth} 
+            height={height} 
+            fill="rgba(255, 255, 255, 0.7)"
         />
 
         <rect 
@@ -104,7 +120,7 @@ export default function TimechartSlider({width = 800, height = 80, onChange = ()
             y={0} 
             width={movingStart + sliderWidth} 
             height={height} 
-            fill="rgba(255, 255, 255, 0.7)"
+            fill="rgba(0, 0, 0, 0)"
             onMouseDown={e => onStartMoving(e, -1)}
         />
         <rect 
@@ -112,11 +128,11 @@ export default function TimechartSlider({width = 800, height = 80, onChange = ()
             y={0} 
             width={width + sliderWidth - movingEnd} 
             height={height} 
-            fill="rgba(255, 255, 255, 0.7)"
+            fill="rgba(0, 0, 0, 0)"
             onMouseDown={e => onStartMoving(e, 1)}
         />
 
-        <g transform={`translate(${movingStart + sliderWidth * 0.3}, ${height / 2})`}>
+        <g transform={`translate(${movingStart + sliderWidth * 0.1}, ${height / 2})`}>
             <text 
                 textAnchor="middle" 
                 transform={`rotate(90)`}

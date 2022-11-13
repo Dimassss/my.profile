@@ -15,13 +15,14 @@ export default {
         {
         selector: 'node',
         style: {
-            'background-color': '#666',
+            'background-color': '#e51',
             'label': 'data(name)',
             'width': 'data(size)',
             'height': 'data(size)',
             'font-size': 'data(fontSize)',
             'overlay-padding': 0,
-            'overlay-opacity': 0
+            'overlay-opacity': 0,
+            'color': "#aaa"
         }
         },
 
@@ -29,8 +30,8 @@ export default {
         selector: 'edge',
         style: {
             'width': 1,
-            'line-color': '#ccc',
-            'target-arrow-color': '#ccc',
+            'line-color': '#333',
+            'target-arrow-color': '#555',
             'target-arrow-shape': 'triangle',
             'arrow-scale': 0.4,
             'curve-style': 'bezier',

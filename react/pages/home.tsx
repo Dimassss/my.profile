@@ -1,6 +1,6 @@
 import DefaultLayout from "../layouts/DefaultLayout";
 import { Typography, Image } from 'antd';
-import styles from "../styles/pages/index.module.scss"
+import styles from "../styles/pages/home.module.scss"
 
 const { Title } = Typography;
 
