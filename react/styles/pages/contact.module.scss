@@ -1,0 +1,32 @@
+@import "../themes/colors.scss";
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 100vh;
+
+    ul {
+        list-style-type: none;
+
+        li {
+            cursor: pointer;
+            margin-top: 1em;
+            border: 1px solid $grey-3;
+            padding: 1em;
+            background-color: $grey-2;
+            color: $green-1;
+
+            &:hover {
+                background-color: $grey-3;
+            }
+        }
+    }
+
+    .open-btn {
+        margin: auto;
+        margin-top: 1em;
+        
+    }
+}
