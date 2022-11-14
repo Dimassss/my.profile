@@ -34,8 +34,10 @@ export default function TimechartSlider({width = 800, height = 80, onChange = ()
 
     const boundVal = (a:number, b:number, val:number) => Math.min(b, Math.max(a, val))
     const onStartMoving = (e:any, side: -1 | 1) => {
-        const x = e.nativeEvent.clientX;
-        const y = e.nativeEvent.clientY;
+        const t = (e.nativeEvent.type == 'touchstart' ? e.nativeEvent.touches[0] : e.nativeEvent)
+        const x = t.clientX;
+        const y = t.clientY;
+        
         setStartPosition([x,y, side])
     }
     const onEndMoving = (e: any) => {
@@ -52,8 +54,9 @@ export default function TimechartSlider({width = 800, height = 80, onChange = ()
     const onMoving = (e: any) => {
         if(startPosition == null) return;
 
-        const x = e.nativeEvent.clientX;
-        const y = e.nativeEvent.clientY;
+        const t = (e.nativeEvent.type == 'touchmove' ? e.nativeEvent.touches[0] : e.nativeEvent)
+        const x = t.clientX;
+        const y = t.clientY;
 
         if(-1 == startPosition[2]) {
             const newStart = start + (x - startPosition[0])
@@ -76,7 +79,13 @@ export default function TimechartSlider({width = 800, height = 80, onChange = ()
     }, [movingEnd, movingStart, dataStart, dataDelta])
     
 
-    return (<g onMouseLeave={onEndMoving} onMouseUp={onEndMoving} onMouseMove={onMoving}>
+    return (<g 
+            onMouseLeave={onEndMoving} 
+            onMouseUp={onEndMoving} 
+            onMouseMove={onMoving}
+            onTouchEnd={onEndMoving}
+            onTouchMove={onMoving}
+        >
         <rect 
             x={0} 
             y={0} 
@@ -122,6 +131,7 @@ export default function TimechartSlider({width = 800, height = 80, onChange = ()
             height={height} 
             fill="rgba(0, 0, 0, 0)"
             onMouseDown={e => onStartMoving(e, -1)}
+            onTouchStart={e => onStartMoving(e, -1)}
         />
         <rect 
             x={movingEnd - sliderWidth} 
@@ -130,6 +140,7 @@ export default function TimechartSlider({width = 800, height = 80, onChange = ()
             height={height} 
             fill="rgba(0, 0, 0, 0)"
             onMouseDown={e => onStartMoving(e, 1)}
+            onTouchStart={e => onStartMoving(e, 1)}
         />
 
         <g transform={`translate(${movingStart + sliderWidth * 0.1}, ${height / 2})`}>
