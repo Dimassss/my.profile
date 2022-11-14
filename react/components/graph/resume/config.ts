@@ -15,14 +15,15 @@ export default {
         {
         selector: 'node',
         style: {
-            'background-color': '#e51',
+            'background-color': '#919',
             'label': 'data(name)',
             'width': 'data(size)',
             'height': 'data(size)',
             'font-size': 'data(fontSize)',
             'overlay-padding': 0,
             'overlay-opacity': 0,
-            'color': "#aaa"
+            'color': "#aaa",
+            'border': '2px solid black'
         }
         },
 
