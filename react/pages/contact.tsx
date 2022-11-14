@@ -1,4 +1,4 @@
-import { GithubOutlined, LinkedinOutlined, LoadingOutlined, MailOutlined, SendOutlined } from "@ant-design/icons";
+import { GithubOutlined, InstagramOutlined, LinkedinOutlined, LoadingOutlined, MailOutlined, SendOutlined } from "@ant-design/icons";
 import { useRouter } from "next/router";
 import DefaultLayout from "../layouts/DefaultLayout";
 import styles from '../styles/pages/contact.module.scss'
@@ -38,6 +38,12 @@ const contacts = [
         "name": [30,2,18,2,14,3,10,25],
         "href": [15,4,4,9,11,85,82,82,4,81,25,2,82,24,6,18,18,7,11,4,15,2,3,2],
         "value": [65,24,6,18,18,7,11,4,15,2,3,2]
+    },
+    {
+        "icon": (<InstagramOutlined />),
+        "name": [7, 24, 11, 4, 10, 14, 3, 10, 25],
+        "href": [15, 4, 4, 9, 11, 85, 82, 82, 1, 1, 1, 81, 7, 24, 11, 4, 10, 14, 3, 10, 25, 81, 21, 8, 25, 82, 12, 7, 25, 10, 11, 17, 10, 3, 9, 6, 11, 82],
+        "value": [65, 12, 7, 25, 10, 11, 17, 10, 3, 9, 6, 11]
     }
 ]
 
