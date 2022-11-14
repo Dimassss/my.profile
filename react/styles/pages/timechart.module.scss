@@ -1,0 +1,20 @@
+@import "../themes/colors.scss";
+
+.timchart-container {
+    width: 100%;
+    min-height: 100vh;
+
+    .timechart-selector {
+        padding-top: 10px;
+        box-shadow: 0 -2px 4px $grey-1;
+        position: sticky;
+        z-index: 2;
+        bottom: 0; 
+        background-color: $grey-2;
+    }
+
+    .timechart-preview{
+        display: flex;
+        justify-content: center;
+    }
+}

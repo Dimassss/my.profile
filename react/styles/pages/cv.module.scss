@@ -1,0 +1,15 @@
+@import "../themes/colors.scss";
+
+.resume-list-container {
+    padding: 1em;
+    color: $grey-4;
+
+    .resume-list-element {
+        color: #999;
+        
+        span {
+            color: #444;
+            padding-left: 1em;
+        }
+    }
+}

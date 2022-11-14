@@ -1,0 +1,38 @@
+.menu-item-icon {
+    font-size: 1em !important;
+    line-height: 0.5em !important;
+    width: 0.1em;
+}
+
+.menu-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 !important;
+    margin: 0;
+}
+
+.sider {
+    overflow: hidden;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 1em;
+    z-index: 1;
+
+    .sider-menu {
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        flex-direction: column;
+        height: 100vh;
+        font-size: 2em;
+    }
+}
+
+.layout-body {
+    min-height: 100vh;
+    margin-left: 4em;
+}
