@@ -9,24 +9,24 @@ const { Title } = Typography;
 const texts = [
   {
     title: "General description:",
-    text: `Я рішуча проактивна особистість, яка завжди готова до вирішування складних проблем,
-          навіть якщо я не маю спочатку в цьому досвіду. Спокійний, амбіверт і завжди заряджений на перемогу, 
-          Не курю і не п'ю, а також займаюсь регулярно спортом. Маю стратегічне мислення, але також вмію працювати
-          на тактичному і оперативному рівнях.`
+    text: `I am a decisive, proactive person who is always ready to solve complex problems, even if I have no experience 
+          in this field. Calm, ambivert and always aimed on victory, I don't smoke or drink, and I do sports regularly. 
+          I have strategic thinking, but I can also work at the tactical and operational levels.`
   },
   {
     title: "Communication style:",
-    text: `Все що відноситься до технологій, математики і інших наук, а також люблю вивчати
-          чи розмовляти на теми звязані з філософією і вирішенню глобальних питань. Також
-          цікавлюсь загальной і аналітичной психологією.`
+    text: `Everything related to technology, mathematics and other sciences, and I also like to study
+          or talk about topics related to philosophy and solving global issues. Also
+          I am interested in general and analytical psychology.`
   },
   {
     title: "What do I appreciate in people:",
-    text: `Зацікавленість і розвиненість хоча б в одній якійсь темі. Цілеспрямованість, чітке розуміння
-          своїх бажань і відсутність
-          мислення лузера. Статегічне мислення і вміння працювати в команді і розуміння, що
-          це вміння полягає на тому, що ти спрямовуєш свої сили на виконная спільної задачі і 
-          створення умов для інших, щоб вони могли цю задачу вирішувати також, а не тільки приємні балачки.`
+    text: `Interest and development in at least one topic. Purposefulness, clear understanding
+          their desires and absence
+          the mindset of a loser. Strategic thinking and the ability to work in a team and understanding that
+          this skill consists in the fact that you direct your forces to the execution of a joint task and
+          creating conditions for others so that they can solve this problem as well, and not just pleasant chatter.`
+          
   }
 ]
 
