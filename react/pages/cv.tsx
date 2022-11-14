@@ -9,6 +9,7 @@ import styles from "../styles/pages/cv.module.scss"
 const { useBreakpoint } = Grid
 
 const makeListFromTree = (tree: any) => {
+    if(!tree) return tree;
     if(!tree.children) return <p style={{color: "#999"}}><a href="#">{tree.name}</a></p>
     else {
         //check if all childrens are not parents

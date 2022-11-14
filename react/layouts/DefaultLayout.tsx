@@ -60,6 +60,7 @@ export default function DefaultLayout({children}: Props){
                     window.open(el.key, '_self')
                     //router.push(el.key)
                 }}
+                onTouchStart={e => console.log(Math.random())}
             />
         </Sider>
         <Layout className={styles["layout-body"]}>

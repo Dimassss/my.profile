@@ -33,7 +33,7 @@ export default function TimechartSlider({width = 800, height = 80, onChange = ()
     }, [width])
 
     const boundVal = (a:number, b:number, val:number) => Math.min(b, Math.max(a, val))
-    const onStartMoving = (e:any, side: -1 | 1) => {
+    const onStartMoving = (e:any, side: -1 | 1 | 0) => {
         const t = (e.nativeEvent.type == 'touchstart' ? e.nativeEvent.touches[0] : e.nativeEvent)
         const x = t.clientX;
         const y = t.clientY;
@@ -45,7 +45,10 @@ export default function TimechartSlider({width = 800, height = 80, onChange = ()
 
         if(-1 == startPosition[2]) {
             setStart(movingStart)
+        } else if(1 == startPosition[2]) {
+            setEnd(movingEnd)
         } else {
+            setStart(movingStart)
             setEnd(movingEnd)
         }
 
@@ -61,9 +64,25 @@ export default function TimechartSlider({width = 800, height = 80, onChange = ()
         if(-1 == startPosition[2]) {
             const newStart = start + (x - startPosition[0])
             setMovingStart(boundVal(0, end - 3*sliderWidth, newStart))
-        } else {
+        } else if(1 == startPosition[2]) {
             const newEnd = end + (x - startPosition[0])
             setMovingEnd(boundVal(start + 3*sliderWidth, width, newEnd))
+        } else {
+            const newStart = start + (x - startPosition[0])
+            const newEnd = end + (x - startPosition[0])
+
+            if(newStart >= 0 && width >= newEnd) {
+                setMovingStart(newStart)
+                setMovingEnd(newEnd)
+            } else {
+                if(newStart < 0) {
+                    setMovingStart(0)
+                    setMovingEnd(end-start)
+                } else {
+                    setMovingStart(width - (end - start))
+                    setMovingEnd(width)
+                }
+            }
         }
     }
 
@@ -77,7 +96,6 @@ export default function TimechartSlider({width = 800, height = 80, onChange = ()
             dataStart + dataDelta * movingEnd / width
         )
     }, [movingEnd, movingStart, dataStart, dataDelta])
-    
 
     return (<g 
             onMouseLeave={onEndMoving} 
@@ -134,6 +152,15 @@ export default function TimechartSlider({width = 800, height = 80, onChange = ()
             onTouchStart={e => onStartMoving(e, -1)}
         />
         <rect 
+            x={movingStart + sliderWidth} 
+            y={0} 
+            width={movingEnd - movingStart - 2*sliderWidth} 
+            height={height} 
+            fill="rgba(0, 0, 0, 0)"
+            onMouseDown={e => onStartMoving(e, 0)}
+            onTouchStart={e => onStartMoving(e, 0)}
+        />
+        <rect 
             x={movingEnd - sliderWidth} 
             y={0} 
             width={width + sliderWidth - movingEnd} 
@@ -143,7 +170,7 @@ export default function TimechartSlider({width = 800, height = 80, onChange = ()
             onTouchStart={e => onStartMoving(e, 1)}
         />
 
-        <g transform={`translate(${movingStart + sliderWidth * 0.1}, ${height / 2})`}>
+        <g transform={`translate(${movingStart + sliderWidth * 0.1}, ${height / 2})`} >
             <text 
                 textAnchor="middle" 
                 transform={`rotate(90)`}
