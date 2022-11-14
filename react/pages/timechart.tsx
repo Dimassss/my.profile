@@ -47,13 +47,22 @@ export default function TimechartPage(){
 
         axios.get('knowledge').then((res) => {
             let d = res.data
+            let newGroups: any[] = []
+
             d = d.map((el: any, i: number) => {
                 el.start = el.learnStartTimestamp
                 el.end = el.learnEndTimestamp
-                el.group = [1, 5, 3, 4, 2][i % 5].toString()
+                el.group = el.groups[0].name
+
+                newGroups.push(el.group)
 
                 return el
             })
+
+            newGroups = newGroups.filter((gr, i) => newGroups.indexOf(gr) == i)
+                .map((name, i) => ({name, color: pallets[0][i]}))
+
+            setGroups(newGroups)
             setData(d)
             setIsFetching(false)
         })

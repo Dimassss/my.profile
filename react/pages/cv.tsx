@@ -16,7 +16,7 @@ const makeListFromTree = (tree: any) => {
         const childrenArePure = tree.children.reduce((a: boolean, el: any) => a || !!el.children, false)
 
         return [
-            (<p className={styles["resume-list-element"]}>
+            (<p className={styles["resume-list-element"]} key={tree.name}>
                 <a href="#">{tree.name}</a>: 
                 <span>
                     {tree.children.map((el: any) => el.name).join(', ')}
