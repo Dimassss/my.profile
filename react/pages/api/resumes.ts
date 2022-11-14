@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next"
 
 type resumeTreeType = {
     name: string,
+    url? : string,
     children?: resumeTreeType[]
 }
 
@@ -34,6 +35,7 @@ const resumeTree: resumeTreeType = {
                 },
                 {
                     name: "Frontend",
+                    url: "https://github.com/Dimassss/CV/raw/main/resume.pdf",
                     children: [
                         {
                             name: "Vue"

@@ -15,14 +15,16 @@ export default {
         {
         selector: 'node',
         style: {
-            'background-color': '#919',
+            'color': "#aaa",
             'label': 'data(name)',
             'width': 'data(size)',
             'height': 'data(size)',
             'font-size': 'data(fontSize)',
             'overlay-padding': 0,
             'overlay-opacity': 0,
-            'color': "#aaa",
+            'background-color': (d: any) => {
+                return d.data().resume.url ? "#d71" : '#919'
+            },
             'border': '2px solid black'
         }
         },
