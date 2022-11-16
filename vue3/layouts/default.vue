@@ -6,29 +6,26 @@
             :collapsed="true"
             width="4em"
             collapsedWidth="4em"
-            class="sider"
+            :class="$style.sider"
         >
             <a-menu
                 mode="inline"
-                :selectedKeys="[
-                    $router.currentRoute
-                        ? $router.currentRoute.path.split('/')[1]
-                        : 'home'
-                ]"
-                class="sider-menu"
+                :selectedKeys="[selected]"
+                :class="$style['sider-menu']"
+                @click="({key}) => openPage(key)"
             >
                 <a-menu-item 
                     v-for="menuItem in menuItems" 
                     :key="menuItem.key"
-                    @click="() => openPage(menuItem.key)"
-                >   {{menuItem.title}}
+                > 
+                    {{menuItem.title}}
                     <template #icon>
                         <component :is="menuItem.icon"/>
                     </template>
                 </a-menu-item>
             </a-menu>
         </a-layout-sider>
-        <a-layout class="layout-body">
+        <a-layout :class="$style['layout-body']">
             <a-layout-content>
                 <slot/>
             </a-layout-content>
@@ -73,18 +70,24 @@ export default {
     },
     data() {
         return {
-            menuItems
+            menuItems,
+            selected: 'home'
         }
     },
     methods: {
         openPage(path: string){
+            this.selected = path
             this.$router.push(path)
         }
+    },
+    beforeMount(){
+        const p = this.$router.currentRoute.value.path
+        this.selected = p.split('/')[1] ? p.split('/')[1] : 'home'
     }
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" module>
 
 .menu-item {
     display: flex;
