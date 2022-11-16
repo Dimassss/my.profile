@@ -1,6 +1,11 @@
 <template>
     <DefaultLayout>
-        <Center>dfas</Center>
+        <Center height="100vh">
+            <a-typography-title>404</a-typography-title>
+            <a-typography-text>
+                <a href="/home">Go home</a>
+            </a-typography-text>
+        </Center>
     </DefaultLayout>
 </template>
 
