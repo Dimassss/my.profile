@@ -1,5 +1,10 @@
 .vscode
+package-lock.json
+
 
 react/node_modules
 react/package-lock.json
 react/.next
+
+
+vue3/node_modules

@@ -2,11 +2,11 @@ export type ScreenSizeType = {
     [screenType in 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | 'xxxl']: boolean;
 };
 
-const inst: {[key: string]: (e: ScreenSizeType) => void} = {};
+const inst: {[key: symbol | string]: (e: ScreenSizeType) => void} = {};
 let subscribed = false
 
 
-export default function useResizeEffect(key: string, cb: (screenSize: ScreenSizeType) => void){
+export default function useResizeEffect_OptionAPI(key: string, cb: (screenSize: ScreenSizeType) => void){
     if(typeof window !== 'undefined' && !subscribed) {
         addEventListener('resize', (e: any) => {
             const w = e.target.innerWidth
@@ -17,7 +17,7 @@ export default function useResizeEffect(key: string, cb: (screenSize: ScreenSize
                 lg: 992 < w,
                 xl: 1200 < w,
                 xxl: 1600 < w,
-                xxxl: 2000 < w,
+                xxxl: 2000 < w
             }
 
             Object.values(inst).forEach(f => f(screenSize))
@@ -26,3 +26,4 @@ export default function useResizeEffect(key: string, cb: (screenSize: ScreenSize
 
     inst[key] = cb
 }
+
